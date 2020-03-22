@@ -1,0 +1,26 @@
+.cardFromDeck {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid black;
+    overflow: hidden;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    & img {
+        width: 100%;
+    }
+    transition-property: all 1s;
+}
+
+@keyframes entered {
+    from {
+        opacity: 0;
+        transform: translate(20px, -50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0, 0);
+    }
+}
