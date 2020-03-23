@@ -22,15 +22,6 @@ const App = (props) => {
             bringRickCharacters()
         }
     }, [])
-  
-    useEffect(() => {
-        if (rickCharacters) {
-            setBoardStatus(prev => ({
-                ...prev,
-                deck: createDeck(boardStatus.pairsPlaying, rickCharacters, rickCharacters.length)
-            }))
-        }
-    }, [rickCharacters])
 
     useEffect(() => {
         if(rickCharacters) {
@@ -39,12 +30,14 @@ const App = (props) => {
                 deck: createDeck(boardStatus.pairsPlaying, rickCharacters, rickCharacters.length)
             }))
         }
-    }, [boardStatus.pairsPlaying])
+    }, [boardStatus.pairsPlaying, rickCharacters])
+
+    console.log('app se renderiza')
 
     return(
         <>
             <Settings boardStatus={boardStatus} setBoardStatus={setBoardStatus}/> 
-            <Board boardStatus={boardStatus} setBoardStatus={setBoardStatus}/>
+            <Board deck={boardStatus.deck}/>
         </>
     )
 }

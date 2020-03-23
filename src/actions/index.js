@@ -1,8 +1,5 @@
 import axios from 'axios'
 
-import createDeck from '../assets/functions/createDeck'
-import initialState from '../initialState'
-
 export const bringRickCharacters = () => async dispatch => {
     dispatch({
         type: 'LOADING'
@@ -14,11 +11,6 @@ export const bringRickCharacters = () => async dispatch => {
                 type: 'BRING_RICK_CHARACTERS',
                 payload: characters
             })
-            // const deck = createDeck(initialState.pairsPlaying, characters, characters.length)
-            // dispatch({
-            //     type: 'NEW_DECK',
-            //     payload: deck
-            // })
         })
         .catch(error => {
             const theError = "There's an error loading Rick and Morty characters :O" + error.message
@@ -28,11 +20,3 @@ export const bringRickCharacters = () => async dispatch => {
             })
         })
 }
-
-// export const changePairsOnBoard = e => dispatch => {
-//     console.log(e)
-//     dispatch({
-//         type: 'CHANGE_PAIRS_ON_BOARD',
-//         payload: e
-//     })
-// }

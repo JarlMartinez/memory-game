@@ -6,27 +6,44 @@ import Card from '../Card'
 
 import './index.scss'
 
-// export default ({status, setStatus, cardClicked}) => {
 const Board = (props) => {
 
-    const { cardClicked,
-            boardStatus,
-            setBoardStatus,
-            rickCharacters, 
+    console.log('boarrd se renderiza')
+
+    const { deck,
             loading, error} = props
 
-    const displayDeck = () => {
-        if (boardStatus.deck) {
-            console.log('el board recibe dec')
-            return (
-                boardStatus.deck.map((char, i) => (
-                    <Card key={i} char={char} delay={i * 100} cardClicked={cardClicked}/>
-                    ))
-                )
-            }
-        }
+    // const [game, setGame] = useState({
+    //     pairSelected: [],
+    //     pairsFounded: []
+    // }) 
 
-    const displayStatus = () => {
+    const game = {
+        pairSelected: [],
+        pairsFounded: []
+    }
+
+    const cardClicked = char => {
+        if (game.pairSelected.length === 0) {
+            game.pairSelected.push(char)
+        return
+        }
+        if (game.pairSelected.length === 1) {
+            if (game.pairSelected[0].id === char.id && game.pairSelected[0].key !== char.key) {
+                game.pairsFounded.push(char)
+                game.pairSelected.length = 0
+                return
+            } else {
+                game.pairSelected.length = 0
+                return
+            }
+                
+        }
+        console.log('hay algo raro seleccionando pares')
+        return
+    }
+
+    const displayContent = () => {
         if(loading) {
             return <Loader />
         }
@@ -38,13 +55,27 @@ const Board = (props) => {
             </>
             )
         }
-        return
+        if (deck) {
+            // i created a rndom number bc the key of all cards must be diferent every time, 
+            // and so is tricky when there are 2 equal cards on deck; and if i use the index
+            const ran = Math.random()
+            return (
+                deck.map((char, i) => (
+                    <Card
+                        game={game}
+                        key={ran + i} 
+                        char={{key: ran + i, ...char}} 
+                        delay={i * 80} 
+                        cardClicked={cardClicked}/>
+                    ))
+                )
+            }
+        return 
     }
 
     return (
         <div className='board'>
-            {displayStatus()}
-            {rickCharacters && displayDeck()}
+            {displayContent()}
         </div>
     )
 

@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import cardCover from '../../assets/images/rym-redondo.png'
 
 import './index.scss'
 
-export default ({char, delay}) => {
+export default (props) => {
+
+    const {char, delay, cardClicked, game} = props
+    const shouldShow = game.pairsFounded.includes(char) ? true : false
 
     const [cardState, setCardState] = useState({
         isFlippedUp: false,
-        image: cardCover
+        image: shouldShow ? char.image : cardCover
     })
 
+    // Restore values every time char values change
+    useEffect(() => {
+        setCardState({
+            isFlippedUp: false,
+            image: cardCover
+        })
+    }, [char])
+
     const handleClick = () => {
+        cardClicked(char)
         if (cardState.isFlippedUp) {
             setCardState({
                 isFlippedUp: false,

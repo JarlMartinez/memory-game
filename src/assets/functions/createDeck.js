@@ -1,7 +1,7 @@
 import createDesorderedArray from './createDesorderedArray'
 
 export default (pairsPlaying, characters, totalCharacters) => {
-    //The min num iin the array we create is 1 bc the id's of the characters begin from 1
+    //The min num in the array we create is 1 bc the id's of the characters begin from 1
     const randomArray = createDesorderedArray(pairsPlaying, 1, totalCharacters)
     const randomGame = randomArray.map(ran => {
         for (var i = 0; i < characters.length; i++) {

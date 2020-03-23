@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import { IconContext } from 'react-icons'
 import { IoIosSettings } from 'react-icons/io'
 
-import { changePairsOnBoard } from '../../actions'
-
 import './index.scss'
 
 const Settings = ({ boardStatus, setBoardStatus }) => {
