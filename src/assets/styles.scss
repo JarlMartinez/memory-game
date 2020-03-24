@@ -1,0 +1,11 @@
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+$general-background: rgba(255, 255, 255, 0.664);
+$general-border-radius: 10px;
+$general-border: 2px solid white;

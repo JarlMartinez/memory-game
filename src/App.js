@@ -32,12 +32,19 @@ const App = (props) => {
         }
     }, [boardStatus.pairsPlaying, rickCharacters])
 
-    console.log('app se renderiza')
+    const newGame = () => {
+        if(rickCharacters) {
+            setBoardStatus(prev => ({
+                ...prev,
+                deck: createDeck(boardStatus.pairsPlaying, rickCharacters, rickCharacters.length)
+            }))
+        }
+    }
 
     return(
         <>
             <Settings boardStatus={boardStatus} setBoardStatus={setBoardStatus}/> 
-            <Board deck={boardStatus.deck}/>
+            <Board deck={boardStatus.deck} newGame={newGame}/>
         </>
     )
 }

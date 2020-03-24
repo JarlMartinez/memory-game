@@ -1,18 +1,43 @@
-body {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@import '../../assets/styles.scss';
 
 .board {
     margin: 20px;
     // width: 100%;
-    max-width: 900px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    & .wonModalContainer {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $general-background;
+        & .wonModal {
+            width: 80vw;
+            max-width: 500px;
+            height: 200px;
+            background-color: rgba(72, 197, 0, 0.733);
+            border-radius: $general-border-radius;
+            border: $general-border;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            & p {
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 10px;
+                background-color: $general-background;
+                border: $general-border;
+                color: rgb(47, 47, 47);
+                text-align: center;
+            }
+        }
+    }
 }

@@ -21,12 +21,14 @@ export default (pairsPlaying, characters, totalCharacters) => {
 
     const desorderedDeck = []
     deck.forEach((char, i) => {
-        desorderedDeck[desorderedIndexesForDeck[i]] = char
+        desorderedDeck[desorderedIndexesForDeck[i]] = {
+            key: i + 1,
+            ...char
+        }
     })
 
     // console.log('el deck', deck)
     // console.log('los index', desorderedIndexesForDeck)
-    // console.log('desorderedDeck', desorderedDeck)
 
     return desorderedDeck
 }

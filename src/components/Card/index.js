@@ -1,50 +1,68 @@
 import React, { useState, useEffect } from 'react'
 
-import cardCover from '../../assets/images/rym-redondo.png'
+import defaultCover from '../../assets/images/rym-redondo.png'
 
 import './index.scss'
 
 export default (props) => {
 
-    const {char, delay, cardClicked, game} = props
-    const shouldShow = game.pairsFounded.includes(char) ? true : false
+    const { char, cardClicked, status, dataForAnimation } = props
 
-    const [cardState, setCardState] = useState({
-        isFlippedUp: false,
-        image: shouldShow ? char.image : cardCover
-    })
-
-    // Restore values every time char values change
-    useEffect(() => {
-        setCardState({
-            isFlippedUp: false,
-            image: cardCover
-        })
-    }, [char])
-
-    const handleClick = () => {
-        cardClicked(char)
-        if (cardState.isFlippedUp) {
-            setCardState({
+    const [cardState, setCardState] = useState(() => {
+        if (status === 'founded' || status === 'selected') {
+            return ({
+                isFlippedUp: true,
+                cover: char.image
+            })
+        } else {
+            return ({
                 isFlippedUp: false,
-                image: cardCover
+                cover: defaultCover
             })
         }
-        if (!cardState.isFlippedUp) {
-            setCardState({
-                isFlippedUp: true,
-                image: char.image
-            })
+    })
+
+    let classForCard = 'cardFromDeck'
+
+    const handleClick = () => {
+        classForCard ='cardFromDeck clicked'
+        if (status === 'normal') {
+            setTimeout(() => cardClicked(char), 300)
+    
+            if(cardState.isFlippedUp) {
+                setCardState({
+                    isFlippedUp: false,
+                    cover: defaultCover
+                })
+            }
+            if (!cardState.isFlippedUp) {
+                setCardState({
+                    isFlippedUp: true,
+                    cover: char.image
+                })
+            }
+        }
+        if (status === 'selected') {
+            setTimeout(() => cardClicked(char), 300)
+        }
+    }
+
+    let initialAnimation
+
+    if (dataForAnimation.firstRender) {
+        initialAnimation = {
+            opacity: 0,
+            animation: 'entered .2s forwards',
+            animationDelay: dataForAnimation.delay + 'ms'
         }
     }
 
     return (
         <div 
             className='cardFromDeck' 
-            style={{animationDelay: delay + 'ms'}}
+            style={{...initialAnimation}}
             onClick={handleClick}>
-            {/* <p>{char.name}</p> */}
-            <img src={cardState.image}/>
+            <img src={cardState.cover}/>
         </div>
     )
 } 
