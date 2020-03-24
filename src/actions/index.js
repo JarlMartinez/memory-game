@@ -20,3 +20,10 @@ export const bringRickCharacters = () => async dispatch => {
             })
         })
 }
+
+export const changeSizeOfCards = size => dispatch => {
+    dispatch({
+        type: 'SIZE_OF_CARD',
+        payload: size
+    })
+}

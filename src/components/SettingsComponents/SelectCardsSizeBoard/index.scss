@@ -1,0 +1,22 @@
+@import '../../../assets/styles.scss';
+
+.selectCardsSizeBoard {
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: $general-border-radius;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    & div {
+        font-size: 20px;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}

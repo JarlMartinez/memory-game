@@ -1,33 +1,53 @@
 import React, { useState, useEffect } from 'react'
-
 import { connect } from 'react-redux'
+
+import { changeSizeOfCards } from '../../actions'
+
+import SelectNumOfPairsBoard from '../../components/SettingsComponents/SelectNumOfPairsBoard'
+import SelectCardsSizeBoard from '../../components/SettingsComponents/SelectCardsSizeBoard'
 
 import { IconContext } from 'react-icons'
 import { IoIosSettings } from 'react-icons/io'
 
+
 import './index.scss'
 
-const Settings = ({ boardStatus, setBoardStatus }) => {
+const Settings = ({ setBoardStatus, changeSizeOfCards }) => {
 
     const [settings, setSettings] = useState({
         opened: false,
         isBoardToChangeNumOfPairsOpened: false,
+        isBoardToChangeCardsSizeOpened: false
     })
 
     const closeAll = () => {
         setSettings(prev => ({
             ...prev,
             opened: false,
-            isBoardToChangeNumOfPairsOpened: false
+            isBoardToChangeNumOfPairsOpened: false,
+            isBoardToChangeCardsSizeOpened: false
         }))
     }
 
-    const showBoardToSelectNumOfPairs = e => {
+    const showBoardToSetSometting = e => {
         e.stopPropagation()
-        setSettings(prev => ({
-            ...prev,
-            isBoardToChangeNumOfPairsOpened: true
-        }))
+        switch (e.target.attributes.value.value) {
+            case ('changeNumOfPairs'):
+                setSettings(prev => ({
+                    ...prev,
+                    isBoardToChangeNumOfPairsOpened: true
+                }))
+                return
+            case ('changeCardsSize'): {
+                setSettings(prev => ({
+                    ...prev,
+                    isBoardToChangeCardsSizeOpened: true
+                }))   
+                return
+            }
+            default:
+                return
+        }
     } 
 
     const changeNumOfPairs = e => {
@@ -36,21 +56,28 @@ const Settings = ({ boardStatus, setBoardStatus }) => {
             ...prev,
             pairsPlaying: pairsSelected
         }))
-        closeAll()
     }
 
-    const SelectNumOfPairsBoard = () => {
-        return(
-            <div className='selectNumOfPairsBoard'>
-                <div onClick={changeNumOfPairs} value='4'>4</div>
-                <div onClick={changeNumOfPairs} value='6'>6</div>
-                <div onClick={changeNumOfPairs} value='8'>8</div>
-                <div onClick={changeNumOfPairs} value='10'>10</div>
-                <div onClick={changeNumOfPairs} value='12'>12</div>
-                <div onClick={changeNumOfPairs} value='14'>14</div>
-                <div onClick={changeNumOfPairs} value='16'>16</div>
-                <div onClick={changeNumOfPairs} value='18'>18</div>
-                <div onClick={changeNumOfPairs} value='20'>20</div>
+    const handleChangeSizeOfCards = e => {
+        const sizeSelected = e.target.attributes.value.value
+        changeSizeOfCards(sizeSelected)
+    }
+
+    const Boards = () => {
+        if (settings.isBoardToChangeNumOfPairsOpened) {
+            return <SelectNumOfPairsBoard changeNumOfPairs={changeNumOfPairs}/>
+        }
+        if (settings.isBoardToChangeCardsSizeOpened) {
+            return <SelectCardsSizeBoard handleChangeSizeOfCards={handleChangeSizeOfCards}/>
+        }
+        return (
+            <div>
+                <p value='changeNumOfPairs'
+                    onClick={showBoardToSetSometting}>
+                    Change number of pairs to guess</p>
+                <p value='changeCardsSize'
+                    onClick={showBoardToSetSometting}>
+                    Change cards size</p>
             </div>
         )
     }
@@ -59,15 +86,7 @@ const Settings = ({ boardStatus, setBoardStatus }) => {
         return <>
             <div className='settingsModal'
                 onClick={closeAll}>
-                {settings.isBoardToChangeNumOfPairsOpened 
-                    ? <SelectNumOfPairsBoard />
-                    : <>
-                        <p onClick={showBoardToSelectNumOfPairs}>
-                            Change number of pairs to guess
-                        </p>
-                        <p>change theme</p>
-                    </>
-                }
+                <Boards />
             </div> 
         </>
     }
@@ -83,7 +102,10 @@ const Settings = ({ boardStatus, setBoardStatus }) => {
     </>
 } 
 
+const connectActions = {
+    changeSizeOfCards
+}
 
 const connectStore = store => store
 
-export default connect(connectStore, null)(Settings)
+export default connect(connectStore, connectActions)(Settings)

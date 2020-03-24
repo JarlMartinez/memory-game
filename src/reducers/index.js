@@ -18,6 +18,11 @@ export default (state, action) => {
                 loading: false,
                 rickCharacters: action.payload
             }
+        case 'SIZE_OF_CARD':
+            return {
+                ...state,
+                cardSize: action.payload
+            }
         default:
             return {
                 ...state

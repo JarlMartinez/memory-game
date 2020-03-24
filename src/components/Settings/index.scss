@@ -1,3 +1,5 @@
+@import '../../assets/styles.scss';
+
 .settingsGear {
     position: fixed;
     top: 10px;
@@ -18,30 +20,12 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.527);
+    text-align: center;
     & p {
         cursor: pointer;
         border-radius: 8px;
-        border: 2px solid white;
+        border: $general-border;
         padding: 10px;
-        background-color: rgba(255, 255, 255, 0.644);
-    }
-}
-
-.selectNumOfPairsBoard {
-    background-color: white;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    & div {
-        width: 60px;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border-radius: 5px;
+        background-color: $general-background;
     }
 }

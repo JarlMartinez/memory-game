@@ -1,0 +1,21 @@
+@import '../../../assets/styles.scss';
+
+.selectNumOfPairsBoard {
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: $general-border-radius;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    & div {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}

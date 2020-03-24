@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
 import reducers from './reducers'
-import initialState from './initialState'
+import initialState from './assets/initialState'
 
 import App from './App'
 
