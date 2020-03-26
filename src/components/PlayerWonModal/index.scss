@@ -14,9 +14,9 @@
         width: 80vw;
         max-width: 500px;
         height: 200px;
-        background-color: rgba(72, 197, 0, 0.733);
+        background-color: rgb(98, 197, 40);
         border-radius: $general-border-radius;
-        border: $general-border;
+        // border: $general-border;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -26,7 +26,7 @@
             cursor: pointer;
             border-radius: 10px;
             background-color: $general-background;
-            border: $general-border;
+            // border: $general-border;
             color: rgb(47, 47, 47);
             text-align: center;
         }

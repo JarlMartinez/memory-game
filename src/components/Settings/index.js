@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { changeSizeOfCards } from '../../actions'
+import { changeSizeOfCards, changeNumOfPairsOnBoard } from '../../redux/actions'
 
 import SelectNumOfPairsBoard from '../../components/SettingsComponents/SelectNumOfPairsBoard'
 import SelectCardsSizeBoard from '../../components/SettingsComponents/SelectCardsSizeBoard'
@@ -12,7 +12,9 @@ import { IoIosSettings } from 'react-icons/io'
 
 import './index.scss'
 
-const Settings = ({ setBoardStatus, changeSizeOfCards }) => {
+const Settings = (props) => {
+
+    const { changeSizeOfCards, changeNumOfPairsOnBoard } = props
 
     const [settings, setSettings] = useState({
         opened: false,
@@ -52,10 +54,7 @@ const Settings = ({ setBoardStatus, changeSizeOfCards }) => {
 
     const changeNumOfPairs = e => {
         const pairsSelected = parseInt(e.target.attributes.value.value)
-        setBoardStatus(prev => ({
-            ...prev,
-            pairsPlaying: pairsSelected
-        }))
+        changeNumOfPairsOnBoard(pairsSelected)
     }
 
     const handleChangeSizeOfCards = e => {
@@ -103,7 +102,8 @@ const Settings = ({ setBoardStatus, changeSizeOfCards }) => {
 } 
 
 const connectActions = {
-    changeSizeOfCards
+    changeSizeOfCards,
+    changeNumOfPairsOnBoard
 }
 
 const connectStore = store => store

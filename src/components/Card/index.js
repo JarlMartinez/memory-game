@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { connct, connect } from 'react-redux'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+
+import { cardClicked } from '../../redux/actions'
 
 import defaultCover from '../../assets/images/rym-redondo.png'
 
@@ -7,10 +9,9 @@ import './index.scss'
 
 const Card = (props) => {
 
-    const { char, cardClicked, cardSize,
+    const { char, cardSize, cardClicked, pairSelected, cardsFounded,
             data: {status, delay, isFirstRender} } = props
 
-    // console.log(props)
     // The card initialize its state depending if
     // already has been founded, its currently selected, or neither
     const [cardState, setCardState] = useState(() => {
@@ -35,7 +36,9 @@ const Card = (props) => {
                         cover: char.image
                     })
             }
-            setTimeout(() => cardClicked(char), 300)
+            setTimeout(() => {
+                cardClicked(char, pairSelected, cardsFounded)
+            }, 400)
         }
     }
 
@@ -44,22 +47,17 @@ const Card = (props) => {
     if (isFirstRender) {
         initialAnimation = {
             opacity: 0,
-            animation: 'entered .2s forwards',
+            animation: 'entered .15s forwards',
             animationDelay: delay + 'ms'
         }
-    }
-
-    let cardSize2 = {
-        width: cardSize,
-        height: cardSize
     }
 
     return (
         <div 
             className='cardFromDeck' 
             style={{
-                width: cardSize2.width,
-                height: cardSize2.height,
+                width: cardSize,
+                height: cardSize,
                 ...initialAnimation
             }}
             onClick={handleClick}>
@@ -68,6 +66,14 @@ const Card = (props) => {
     )
 } 
 
-const connectStore = (store) => store
+const connectActions = {
+    cardClicked
+}
 
-export default connect(connectStore, null)(Card)
+const connectStore = (store) => ({
+    pairSelected: store.game.pairSelected,
+    cardsFounded: store.game.cardsFounded,
+    cardSize: store.cardSize,
+})
+
+export default connect(connectStore, connectActions)(Card)

@@ -1,19 +1,38 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { changeNumOfPairsOnBoard } from '../../../redux/actions'
 
 import './index.scss'
+const Board = ({ changeNumOfPairsOnBoard, numOfPairsOnDeck}) => {
 
-export default ({changeNumOfPairs}) => {
-    return(
+    const options = [4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+    return (
         <div className='selectNumOfPairsBoard'>
-            <div onClick={changeNumOfPairs} value='4'>4</div>
-            <div onClick={changeNumOfPairs} value='6'>6</div>
-            <div onClick={changeNumOfPairs} value='8'>8</div>
-            <div onClick={changeNumOfPairs} value='10'>10</div>
-            <div onClick={changeNumOfPairs} value='12'>12</div>
-            <div onClick={changeNumOfPairs} value='14'>14</div>
-            <div onClick={changeNumOfPairs} value='16'>16</div>
-            <div onClick={changeNumOfPairs} value='18'>18</div>
-            <div onClick={changeNumOfPairs} value='20'>20</div>
+            {options.map((val, i) => {
+                const classSelec = val === numOfPairsOnDeck ? 'currentSetting' : ''
+                return(
+                    <div
+                    key={i}
+                    onClick={() => {
+                        changeNumOfPairsOnBoard(val)
+                    }}
+                    className={classSelec}>
+                        {val}
+                    </div>
+                )
+            })}
         </div>
     )
 }
+
+const connectActions = {
+    changeNumOfPairsOnBoard
+}
+
+const connectStore = store => ({
+    numOfPairsOnDeck: store.game.numOfPairsOnDeck
+})
+
+export default connect(connectStore, connectActions)(Board)

@@ -1,14 +1,50 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
+
 import './index.scss'
 
-export default ({handleChangeSizeOfCards}) => {
+const Board = ({handleChangeSizeOfCards, cardSize}) => {
+
+    const sizes = [
+        {
+            percent: '25%',
+            pixels: '40px',
+        },
+        {
+            percent: '50%',
+            pixels: '70px',
+        },
+        {
+            percent: '75%',
+            pixels: '100px',
+        },
+        {
+            percent: '100%',
+            pixels: '140px',
+        },
+    ]
+
     return (
         <div className='selectCardsSizeBoard'>
-            <div onClick={handleChangeSizeOfCards} value='40px'>25%</div>
-            <div onClick={handleChangeSizeOfCards} value='70px'>50%</div>
-            <div onClick={handleChangeSizeOfCards} value='100px'>75%</div>
-            <div onClick={handleChangeSizeOfCards} value='140px'>100%</div>
+            {sizes.map((size, i) => {
+                const optionClass = size.pixels === cardSize ? 'currentSetting' : ''
+                return (
+                <div
+                key={i}
+                className={optionClass}
+                onClick={handleChangeSizeOfCards}
+                value={size.pixels}>
+                    {size.percent}    
+                </div>
+            )
+            })}
         </div>
     )
 }
+
+const connectStore = store => ({
+    cardSize: store.cardSize
+})
+
+export default connect(connectStore, null)(Board)

@@ -23,7 +23,7 @@
     text-align: center;
     & p {
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: $general-border-radius;
         border: $general-border;
         padding: 10px;
         background-color: $general-background;

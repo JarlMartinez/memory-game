@@ -1,73 +1,46 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import WonModal from '../PlayerWonModal'
 import Loader from '../Loader'
 import Card from '../Card'
 
+import { startNewGame } from '../../redux/actions'
+
 import './index.scss'
 
 const Board = (props) => {
 
-    const { newGame, deck, loading, error } = props
+    const { loading, error, rickCharacters,
+            game: {cardsFounded, pairSelected, deck, numOfPairsOnDeck,
+                isFirstRender, numberOfPairsSelected},
+            startNewGame } = props
 
-    const [game, setGame] = useState({
-        isFirstRender: true,
-        pairSelected: [],
-        cardsFounded: []
-    })
-    // Restore values every time a new deck is created, a new game is initialized
+    //Start a game(create newDeck):
+    //  *if rickCharacters are already here,
+    //      and be aware when they arrive, thats why they're in [useEffect]
+    //  *if player wants to play dif num of pairs
     useEffect(() => {
-        setGame({
-            isFirstRender: true,
-            pairSelected: [],
-            cardsFounded: []
-        })
-    }, [deck])
-
-    const cardClicked = char => {
-        if(game.pairSelected.length === 1) {
-            if (game.pairSelected[0].id === char.id &&
-                game.pairSelected[0].key !== char.key) {
-                    setGame(prev => ({
-                        ...prev,
-                        isFirstRender: false,
-                        cardsFounded: [...prev.cardsFounded, ...game.pairSelected, char],
-                        pairSelected: []
-                    }))
-            } else {
-                setGame(prev => ({
-                    ...prev,
-                    isFirstRender: false,
-                    pairSelected: []
-                }))
-            }
-        } else {
-            if (!game.cardsFounded.includes(char)) {
-                setGame(prev => ({
-                    ...prev,
-                    isFirstRender: false,
-                    pairSelected: [char]
-                }))
-            }
+        if (rickCharacters) {
+            startNewGame(numOfPairsOnDeck, rickCharacters)
         }
-    }
+    }, [numOfPairsOnDeck, rickCharacters])
 
-    const DisplayCards = () => {
+    const AllCards = () => {
         return(
             deck.map((char, i) => {
 
                 let status 
-                if (game.cardsFounded.includes(char)) {
+                if (cardsFounded.includes(char)) {
                     status = 'founded'
-                } else if (game.pairSelected.includes(char)) {
+                } else if (pairSelected.includes(char)) {
                     status = 'selected'
                 } else {
                     status = 'normal'
                 }
                 const data = {
-                    isFirstRender: game.isFirstRender,
-                    delay: i * 80,
+                    isFirstRender: isFirstRender,
+                    delay: i * 70,
                     status: status
                 }
                 const renderId = Math.random()
@@ -75,17 +48,17 @@ const Board = (props) => {
                     <Card
                     key={renderId + char.key}                                                                                                                                                                       
                     data={data}
-                    char={char} 
-                    cardClicked={cardClicked}/>
+                    char={char}/>
                 )
             })
         )
     }
 
-    const displayStatus = () => {
-        if(loading) {
-            return <Loader />
-        }
+    const displayContent = () => {
+        if(loading) return <Loader />
+        
+        if(deck) return <AllCards />
+
         if(error) {
             return (
             <>
@@ -94,24 +67,34 @@ const Board = (props) => {
             </>
             )
         }
-        return 
     }
 
     let playerWon = false
 
-    if (deck && game.cardsFounded.length) {
-        playerWon = deck.length === game.cardsFounded.length ? true : false
+    if (deck && cardsFounded.length) {
+        playerWon = deck.length === cardsFounded.length ? true : false
     }
 
     return (
         <div className='board'>
-            {displayStatus()}
-            {deck && <DisplayCards />}
-            {playerWon && <WonModal newGame={newGame} />}
+            {displayContent()}
+            {playerWon && 
+                <WonModal 
+                newGame={() => startNewGame(numOfPairsOnDeck, rickCharacters)}
+                tries={numberOfPairsSelected}/>}
         </div>
     )
 }
 
-const connectReducers = store => store
+const connectActions = {
+    startNewGame
+}
 
-export default connect(connectReducers, null)(Board)
+const connectReducers = store => ({
+    loading: store.loading,
+    error: store.error,
+    rickCharacters: store.rickCharacters,
+    game: store.game
+})
+
+export default connect(connectReducers, connectActions)(Board)

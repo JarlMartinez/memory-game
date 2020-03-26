@@ -4,8 +4,8 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
-import reducers from './reducers'
-import initialState from './assets/initialState'
+import reducers from './redux/reducers'
+import initialState from './redux/initialState'
 
 import App from './App'
 

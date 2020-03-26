@@ -10,12 +10,20 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     & div {
+        font-size: 18px;
         width: 60px;
         height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        border-radius: 5px;
+        position: relative;
+        &.currentSetting::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 45px;
+            border: 2px solid gold;
+        }
     }
 }

@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import Settings from './components/Settings'
 import Board from './components/Board'
 
-import { bringRickCharacters } from './actions'
-import createDeck from './assets/functions/createDeck'
+import { bringRickCharacters } from './redux/actions'
 
 const App = (props) => {
 
     const { bringRickCharacters,
             rickCharacters } = props
-
-    const [boardStatus, setBoardStatus] = useState({
-        deck: null,
-        pairsPlaying: 5,
-    })   
 
     useEffect(() => {
         if (!rickCharacters) {
@@ -23,28 +17,10 @@ const App = (props) => {
         }
     }, [])
 
-    useEffect(() => {
-        if(rickCharacters) {
-            setBoardStatus(prev => ({
-                ...prev,
-                deck: createDeck(boardStatus.pairsPlaying, rickCharacters, rickCharacters.length)
-            }))
-        }
-    }, [boardStatus.pairsPlaying, rickCharacters])
-
-    const newGame = () => {
-        if(rickCharacters) {
-            setBoardStatus(prev => ({
-                ...prev,
-                deck: createDeck(boardStatus.pairsPlaying, rickCharacters, rickCharacters.length)
-            }))
-        }
-    }
-
     return(
         <>
-            <Settings boardStatus={boardStatus} setBoardStatus={setBoardStatus}/> 
-            <Board deck={boardStatus.deck} newGame={newGame}/>
+            <Settings /> 
+            <Board />
         </>
     )
 }
