@@ -1,0 +1,21 @@
+@import '../../../assets/styles.scss';
+.boardOfThemes {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    border-radius: $general-border-radius;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    & div {
+        cursor: pointer;
+        width: 90px;
+        height: 90px;
+        border-radius: $general-border-radius;
+        &.selectedTheme {
+            box-sizing: border-box;
+            border: 7px solid gold;
+        }
+    }
+}

@@ -79,6 +79,25 @@ export default (state, action) => {
                     isFirstRender: false,
                 }
             }
+        case 'INDEX_THEME':
+            return {
+                ...state,
+                currentThemeIndex: action.payload,
+                game: {
+                    ...state.game,
+                    isFirstRender: false,
+                }
+            }
+        case 'SHOW_HIDE_CARDS_FOUNDED':
+            const displayingCards = state.game.displayingPairsFounded ? false : true
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    isFirstRender: false,
+                    displayingPairsFounded: displayingCards
+                }
+            }
         default:
             return {
                 ...state

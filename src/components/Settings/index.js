@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { changeSizeOfCards, changeNumOfPairsOnBoard } from '../../redux/actions'
+import { showOrHideFoundedCars } from '../../redux/actions'
 
 import SelectNumOfPairsBoard from '../../components/SettingsComponents/SelectNumOfPairsBoard'
 import SelectCardsSizeBoard from '../../components/SettingsComponents/SelectCardsSizeBoard'
+import ChangeColorsThemeBoard from '../../components/SettingsComponents/ChangeThemeBoard'
 
 import { IconContext } from 'react-icons'
 import { IoIosSettings } from 'react-icons/io'
@@ -14,10 +15,12 @@ import './index.scss'
 
 const Settings = (props) => {
 
-    const { changeSizeOfCards, changeNumOfPairsOnBoard } = props
+    const { showOrHideFoundedCars,
+            displayingPairsFounded } = props
 
     const [settings, setSettings] = useState({
         opened: false,
+        isBoardToChangeThemeOpened: false,
         isBoardToChangeNumOfPairsOpened: false,
         isBoardToChangeCardsSizeOpened: false
     })
@@ -27,67 +30,74 @@ const Settings = (props) => {
             ...prev,
             opened: false,
             isBoardToChangeNumOfPairsOpened: false,
-            isBoardToChangeCardsSizeOpened: false
+            isBoardToChangeCardsSizeOpened: false,
+            isBoardToChangeThemeOpened: false   
         }))
     }
 
     const showBoardToSetSometting = e => {
         e.stopPropagation()
         switch (e.target.attributes.value.value) {
-            case ('changeNumOfPairs'):
+            case 'changeNumOfPairs':
                 setSettings(prev => ({
                     ...prev,
                     isBoardToChangeNumOfPairsOpened: true
                 }))
                 return
-            case ('changeCardsSize'): {
+            case 'changeCardsSize':
                 setSettings(prev => ({
                     ...prev,
                     isBoardToChangeCardsSizeOpened: true
                 }))   
                 return
-            }
+            case 'changeTheme':
+                setSettings(prev => ({
+                    ...prev,
+                    isBoardToChangeThemeOpened: true
+                }))
+                return
             default:
                 return
         }
     } 
 
-    const changeNumOfPairs = e => {
-        const pairsSelected = parseInt(e.target.attributes.value.value)
-        changeNumOfPairsOnBoard(pairsSelected)
-    }
-
-    const handleChangeSizeOfCards = e => {
-        const sizeSelected = e.target.attributes.value.value
-        changeSizeOfCards(sizeSelected)
-    }
-
     const Boards = () => {
-        if (settings.isBoardToChangeNumOfPairsOpened) {
-            return <SelectNumOfPairsBoard changeNumOfPairs={changeNumOfPairs}/>
-        }
-        if (settings.isBoardToChangeCardsSizeOpened) {
-            return <SelectCardsSizeBoard handleChangeSizeOfCards={handleChangeSizeOfCards}/>
-        }
+        if (settings.isBoardToChangeNumOfPairsOpened) 
+            return <SelectNumOfPairsBoard />
+
+        if (settings.isBoardToChangeCardsSizeOpened)
+            return <SelectCardsSizeBoard />
+
+        if (settings.isBoardToChangeThemeOpened)
+            return <ChangeColorsThemeBoard />
+
         return (
             <div>
+                <p value='changeTheme'
+                    onClick={showBoardToSetSometting}>
+                    Change theme</p>
                 <p value='changeNumOfPairs'
                     onClick={showBoardToSetSometting}>
                     Change number of pairs to guess</p>
                 <p value='changeCardsSize'
                     onClick={showBoardToSetSometting}>
                     Change cards size</p>
+                <div onClick={showOrHideFoundedCars}>
+                    {displayingPairsFounded
+                        ? <p>Hide founded cards</p>
+                        : <p>Show founded cards</p>}
+                </div>
             </div>
         )
     }
 
     const SettingsModal = () => {
-        return <>
+        return (
             <div className='settingsModal'
                 onClick={closeAll}>
                 <Boards />
             </div> 
-        </>
+        )
     }
 
     return <>
@@ -102,10 +112,11 @@ const Settings = (props) => {
 } 
 
 const connectActions = {
-    changeSizeOfCards,
-    changeNumOfPairsOnBoard
+    showOrHideFoundedCars
 }
 
-const connectStore = store => store
+const connectStore = store => ({
+    displayingPairsFounded: store.game.displayingPairsFounded
+})
 
 export default connect(connectStore, connectActions)(Settings)

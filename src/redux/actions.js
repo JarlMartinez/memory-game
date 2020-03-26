@@ -62,6 +62,13 @@ export const cardClicked = (char, pairSelected, cardsFounded) => dispatch => {
     }
 }
 
+export const changeTheme = themeIndex => dispatch => {
+    dispatch({
+        type: 'INDEX_THEME',
+        payload: themeIndex
+    })
+}
+
 export const changeNumOfPairsOnBoard = e => dispatch => {
     dispatch({
         type: 'NUM_OF_PAIRS_ON_BOARD',
@@ -69,9 +76,16 @@ export const changeNumOfPairsOnBoard = e => dispatch => {
     })
 }
 
-export const changeSizeOfCards = size => dispatch => {
+export const changeSizeOfCards = e => dispatch => {
+    const size = e.target.attributes.value.value
     dispatch({
         type: 'SIZE_OF_CARD',
         payload: size
+    })
+}
+
+export const showOrHideFoundedCars = () => dispatch => {
+    dispatch({
+        type: 'SHOW_HIDE_CARDS_FOUNDED'
     })
 }

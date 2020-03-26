@@ -11,7 +11,7 @@ import './index.scss'
 
 const Board = (props) => {
 
-    const { loading, error, rickCharacters,
+    const { loading, error, rickCharacters, cardSize,
             game: {cardsFounded, pairSelected, deck, numOfPairsOnDeck,
                 isFirstRender, numberOfPairsSelected},
             startNewGame } = props
@@ -94,6 +94,7 @@ const connectReducers = store => ({
     loading: store.loading,
     error: store.error,
     rickCharacters: store.rickCharacters,
+    cardSize: store.cardSize,
     game: store.game
 })
 

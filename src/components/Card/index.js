@@ -9,7 +9,8 @@ import './index.scss'
 
 const Card = (props) => {
 
-    const { char, cardSize, cardClicked, pairSelected, cardsFounded,
+    const { char, cardSize, pairSelected, cardsFounded,
+            displayingPairsFounded, cardClicked, deck,
             data: {status, delay, isFirstRender} } = props
 
     // The card initialize its state depending if
@@ -29,7 +30,8 @@ const Card = (props) => {
     })
 
     const handleClick = () => {
-        if (status === 'normal'|| 'selected') {
+        if (status === 'normal'|| status === 'selected') {
+            console.log('cardClicked')
             if (status === 'normal') {
                     setCardState({
                         isFlippedUp: true,
@@ -42,13 +44,29 @@ const Card = (props) => {
         }
     }
 
-    let initialAnimation
+    let styles
+
+    const initialAnimation = {
+        opacity: 0,
+        animation: 'entered .15s forwards',
+        animationDelay: delay + 'ms'
+    }
 
     if (isFirstRender) {
-        initialAnimation = {
+        styles = {
+            ...initialAnimation
+        }
+    }
+    if (status === 'founded' && !displayingPairsFounded ) {
+        styles = {
             opacity: 0,
-            animation: 'entered .15s forwards',
-            animationDelay: delay + 'ms'
+            cursor: 'default'
+        }
+    }
+
+    if (cardsFounded.length === deck.length) {
+        styles = {
+            opacity: 1
         }
     }
 
@@ -58,7 +76,7 @@ const Card = (props) => {
             style={{
                 width: cardSize,
                 height: cardSize,
-                ...initialAnimation
+                ...styles
             }}
             onClick={handleClick}>
             <img src={cardState.cover}/>
@@ -71,6 +89,8 @@ const connectActions = {
 }
 
 const connectStore = (store) => ({
+    deck: store.game.deck,
+    displayingPairsFounded: store.game.displayingPairsFounded,
     pairSelected: store.game.pairSelected,
     cardsFounded: store.game.cardsFounded,
     cardSize: store.cardSize,
