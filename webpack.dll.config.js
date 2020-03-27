@@ -7,12 +7,13 @@ module.exports = {
     entry: {
         modules: [
             'react',
+            'react-redux',
             'react-dom'
         ]
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].[hash].dll.js',
+        filename: 'js/[name].dll.js',
         library: '[name]'
     },
     plugins: [

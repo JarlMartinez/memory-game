@@ -75,6 +75,20 @@ const Board = (props) => {
         playerWon = deck.length === cardsFounded.length ? true : false
     }
 
+    // const setBoardWidth = () => {
+    //     if (deck) {
+    //         let boardWidth, baordHeight
+    //         const CARD_MARGIN = 5
+    //         const sqrtOfTotal = Math.sqrt(deck.length) + 1
+    //         const cardWidth = parseInt(cardSize) + (CARD_MARGIN * 2)
+    //         const windowWidth = window.innerWidth
+    //         const windowHeight = window.innerHeight
+    //         boardWidth = sqrtOfTotal * cardWidth
+    //         if ()
+    //         return 
+    //     }
+    // }
+
     return (
         <div className='board'>
             {displayContent()}

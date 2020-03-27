@@ -1,0 +1,43 @@
+{
+  "icons": [
+    {
+      "src": "/icon_512x512.fe5bc0a1e3c41fd068dc8514f312f588.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_384x384.c3a30fd959258318ebf746889199a3fb.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_256x256.b986bee81d59a9b5a3d50b06c766b472.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_192x192.e51f22bc7904d643bd504e95ecf4f3b7.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_128x128.456fd3fbbc4434d880e51345e28b56c6.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_96x96.2d297aa95d6cfec037dd884084b5c586.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Memory game",
+  "short_name": "Memory game",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "shortname": "Memory game",
+  "description": "Memory game",
+  "background_color": "#2796CB",
+  "theme_color": "#2796CB"
+}

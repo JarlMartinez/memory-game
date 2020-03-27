@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
+import InitialStartGameButton from './components/InitialStartGameButton'
 import Settings from './components/Settings'
 import Board from './components/Board'
 
@@ -12,8 +13,10 @@ const App = (props) => {
             bringRickCharacters,
             rickCharacters } = props
 
+    const [hasGameStarted, setHasGameStarted] = useState(false)
+    
     document.body.style.background = themes[currentThemeIndex].gradient
-
+    
     useEffect(() => {
         if (!rickCharacters) {
             bringRickCharacters()
@@ -23,7 +26,9 @@ const App = (props) => {
     return(
         <>
             <Settings /> 
-            <Board />
+            {!hasGameStarted && 
+                <InitialStartGameButton setHasGameStarted={setHasGameStarted}/>}
+            {hasGameStarted && <Board />}
         </>
     )
 }

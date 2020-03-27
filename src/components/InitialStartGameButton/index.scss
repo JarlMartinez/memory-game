@@ -1,0 +1,18 @@
+.initialButton {
+    cursor: pointer;
+    width: 220px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px 1px rgba(255, 255, 255, 0.466);
+    border-radius: 20px;
+    background-color: rgba(204, 204, 204, 0.479);
+    & p {
+        color: white;
+        font-size: 25px;
+        font-weight: 900;
+        font-variant: small-caps;
+        text-transform: uppercase;
+    } 
+}

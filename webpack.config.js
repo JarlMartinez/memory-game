@@ -15,7 +15,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         publicPath: '/'
     },
     optimization: {
@@ -32,23 +32,23 @@ module.exports = {
         new HtmlWebpackPlugin({
             template:  path.resolve(__dirname, 'src/index.html')
         }),
-        new FaviconsWebpackPlugin('./src/assets/icono-del-rollo-de-película.png'),
+        new FaviconsWebpackPlugin('./src/assets/images/colored-brain.png'),
         new MiniCSSExtractPlugin({
-            filename: 'styles/[name].[hash].css'
+            filename: 'styles/[name].css'
         }),
-        // new WebpackPWAManifestPlugin({
-        //     name: 'Memory game',
-        //     shortname: 'Memory game',
-        //     description: 'Memory game',
-        //     background_color: '#343434',
-        //     theme_color: '#343434',
-        //     icons : [
-        //         {
-        //             src: path.resolve('src/assets/icono-del-rollo-de-película.png'),
-        //             sizes: [96, 128, 192, 256, 384, 512]                    
-        //         }
-        //     ]
-        // }),
+        new WebpackPWAManifestPlugin({
+            name: 'Memory game',
+            shortname: 'Memory game',
+            description: 'Memory game',
+            background_color: '#2796CB',
+            theme_color: '#2796CB',
+            icons : [
+                {
+                    src: path.resolve('src/assets/images/colored-brain.png'),
+                    sizes: [96, 128, 192, 256, 384, 512]                    
+                }
+            ]
+        }),
         // new WorkboxWebpackPlugin.GenerateSW({
         //     runtimeCaching: [
         //         {
@@ -87,7 +87,7 @@ module.exports = {
                     options: {
                         limit: 1000,
                         // si el archivo es mas pesado, va a llamar a file-loader como fallback
-                        name: '[name].[hash].[ext]',
+                        name: '[name].[ext]',
                         outputPath: 'assets/images'
                     }
                 }
