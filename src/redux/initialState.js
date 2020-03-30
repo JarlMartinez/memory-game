@@ -10,7 +10,7 @@ export default {
     error: null,
     rickCharacters: null,
     currentThemeIndex: randomIndexForTheme,
-    cardSize: '70px',
+    cardSize: '100px',
     game : {
         displayingPairsFounded: false,
         numOfPairsOnDeck: DEFAULT_INITIAL_PAIRS, 
