@@ -1,4 +1,4 @@
-export default (len, min, max) => {
+const desorderdArray = (len, min, max) => {
     if (min === null) {
         min = 0
     }
@@ -19,3 +19,5 @@ export default (len, min, max) => {
     }
     return array
 }
+
+export default desorderdArray

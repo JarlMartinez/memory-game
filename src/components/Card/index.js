@@ -70,6 +70,9 @@ const Card = (props) => {
         }
     }
 
+    const opacityOfDefault = cardState.isFlippedUp ? 0 : 1
+    const opacityOfCharCover = cardState.isFlippedUp ? 1 : 0
+
     return (
         <div 
             className='cardFromDeck' 
@@ -79,7 +82,10 @@ const Card = (props) => {
                 ...styles
             }}
             onClick={handleClick}>
-            <img src={cardState.cover}/>
+            {/* I chose to place two images and change opacities so char.image gets
+            loaded rigth away when page laods. Faster */}
+            <img style={{opacity: opacityOfCharCover}} src={char.image}/>
+            <img style={{opacity: opacityOfDefault}} src={defaultCover}/>
         </div>
     )
 } 

@@ -3,7 +3,9 @@
     overflow: hidden;
     margin: 5px;
     cursor: pointer;
+    position: relative;
     & img {
+        position: absolute;
         width: 100%;
     }
 }

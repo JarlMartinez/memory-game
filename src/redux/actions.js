@@ -5,7 +5,11 @@ export const bringRickCharacters = () => async dispatch => {
     dispatch({
         type: 'LOADING'
     })
-        await axios.get('https://rickandmortyapi.com/api/character')
+        const MIN_NUM_OF_PAGES = 1
+        const MAX_NUM_OF_PAGES = 25
+        const randomPage = 
+            Math.floor(Math.random() * (MAX_NUM_OF_PAGES - MIN_NUM_OF_PAGES + 1) ) + MIN_NUM_OF_PAGES 
+        await axios.get(`https://rickandmortyapi.com/api/character/?page=${randomPage}`)
         .then(response => {
             const characters = response.data.results 
             dispatch({
@@ -23,7 +27,8 @@ export const bringRickCharacters = () => async dispatch => {
 }
 
 export const startNewGame = (numOfPairs, characters) => dispatch => {
-    const newDeck = createDeck(numOfPairs, characters, characters.length)
+    const newDeck = createDeck(numOfPairs, characters)
+    console.log(newDeck)
     dispatch({
         type: 'START_NEW_GAME',
         payload: newDeck
