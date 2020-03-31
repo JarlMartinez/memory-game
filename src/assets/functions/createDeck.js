@@ -9,7 +9,6 @@ export default (pairsPlaying, characters) => {
     // We add 19 bc the id of the 20th character is 19 nums ahead
     const maxID = minID + 19
     // First we choose a the random characters that will play on deck 
-    console.log(minID)
     const randomArray = createDesorderedArray(pairsPlaying, minID, maxID)
     const randomGame = randomArray.map(ran => {
         for (var i = 0; i < TOTAL_CHARACTERS; i++) {

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { showOrHideFoundedCars } from '../../redux/actions'
-
-import SelectNumOfPairsBoard from '../../components/SettingsComponents/SelectNumOfPairsBoard'
-import SelectCardsSizeBoard from '../../components/SettingsComponents/SelectCardsSizeBoard'
-import ChangeColorsThemeBoard from '../../components/SettingsComponents/ChangeThemeBoard'
+import SettingsMenu from '../SettingsComponents/SettingsMenu'
+import SelectNumOfPairsBoard from '../SettingsComponents/SelectNumOfPairsBoard'
+import SelectCardsSizeBoard from '../SettingsComponents/SelectCardsSizeBoard'
+import ChangeColorsThemeBoard from '../SettingsComponents/ChangeThemeBoard'
 
 import { IconContext } from 'react-icons'
 import { IoIosSettings } from 'react-icons/io'
@@ -13,10 +12,7 @@ import { IoIosSettings } from 'react-icons/io'
 
 import './index.scss'
 
-const Settings = (props) => {
-
-    const { showOrHideFoundedCars,
-            displayingPairsFounded } = props
+const Settings = () => {
 
     const [settings, setSettings] = useState({
         opened: false,
@@ -59,7 +55,7 @@ const Settings = (props) => {
             default:
                 return
         }
-    } 
+    }
 
     const Boards = () => {
         if (settings.isBoardToChangeNumOfPairsOpened) 
@@ -71,24 +67,7 @@ const Settings = (props) => {
         if (settings.isBoardToChangeThemeOpened)
             return <ChangeColorsThemeBoard />
 
-        return (
-            <div>
-                <p value='changeTheme'
-                    onClick={showBoardToSetSometting}>
-                    Change theme</p>
-                <p value='changeNumOfPairs'
-                    onClick={showBoardToSetSometting}>
-                    Change number of pairs to guess</p>
-                <p value='changeCardsSize'
-                    onClick={showBoardToSetSometting}>
-                    Change cards size</p>
-                <div onClick={showOrHideFoundedCars}>
-                    {displayingPairsFounded
-                        ? <p>Hide founded cards</p>
-                        : <p>Show founded cards</p>}
-                </div>
-            </div>
-        )
+        return <SettingsMenu showBoardToSetSometting={showBoardToSetSometting} />
     }
 
     const SettingsModal = () => {
@@ -111,12 +90,4 @@ const Settings = (props) => {
     </>
 } 
 
-const connectActions = {
-    showOrHideFoundedCars
-}
-
-const connectStore = store => ({
-    displayingPairsFounded: store.game.displayingPairsFounded
-})
-
-export default connect(connectStore, connectActions)(Settings)
+export default connect(null, null)(Settings)

@@ -21,11 +21,4 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.527);
     text-align: center;
-    & p {
-        cursor: pointer;
-        border-radius: $general-border-radius;
-        border: $general-border;
-        padding: 10px;
-        background-color: $general-background;
-    }
 }

@@ -1,0 +1,42 @@
+@import '../../../assets/styles.scss';
+
+.settingsMenu {
+    & p {
+        cursor: pointer;
+        border-radius: $general-border-radius;
+        border: $general-border;
+        padding: 10px;
+        background-color: $general-background;
+    }
+    & .showHideFoundedCardsDiv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & p {
+            cursor: default;
+        }
+        & .switch {
+            cursor: pointer;
+            width: 70px;
+            height: 40px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            & .switchButton {
+                position: absolute;
+                top: 6.5px;
+                left: 6.5px;
+                background-color: white;
+                border-radius: 50%;
+                width: 27px;
+                height: 27px;
+                color: rgb(32, 32, 32);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 10px;
+                transition: all .5s;
+            }
+        }
+    }
+}

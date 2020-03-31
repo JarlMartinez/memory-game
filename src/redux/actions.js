@@ -6,7 +6,7 @@ export const bringRickCharacters = () => async dispatch => {
         type: 'LOADING'
     })
         const MIN_NUM_OF_PAGES = 1
-        const MAX_NUM_OF_PAGES = 25
+        const MAX_NUM_OF_PAGES = 24
         const randomPage = 
             Math.floor(Math.random() * (MAX_NUM_OF_PAGES - MIN_NUM_OF_PAGES + 1) ) + MIN_NUM_OF_PAGES 
         
@@ -30,7 +30,6 @@ export const bringRickCharacters = () => async dispatch => {
 
 export const startNewGame = (numOfPairs, characters) => dispatch => {
     const newDeck = createDeck(numOfPairs, characters)
-    console.log(newDeck)
     dispatch({
         type: 'START_NEW_GAME',
         payload: newDeck

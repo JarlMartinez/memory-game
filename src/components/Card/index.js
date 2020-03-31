@@ -31,7 +31,6 @@ const Card = (props) => {
 
     const handleClick = () => {
         if (status === 'normal'|| status === 'selected') {
-            console.log('cardClicked')
             if (status === 'normal') {
                     setCardState({
                         isFlippedUp: true,
