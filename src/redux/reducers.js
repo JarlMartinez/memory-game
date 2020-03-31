@@ -98,6 +98,12 @@ export default (state, action) => {
                     displayingPairsFounded: displayingCards
                 }
             }
+        case 'CHANGE_LANGUAGE':
+            const newLanguage = state.language === 'spanish' ? 'english' : 'spanish'
+            return {
+                ...state,
+                language: newLanguage
+            }
         default:
             return {
                 ...state

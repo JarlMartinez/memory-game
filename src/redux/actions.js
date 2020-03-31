@@ -95,3 +95,9 @@ export const showOrHideFoundedCars = () => dispatch => {
         type: 'SHOW_HIDE_CARDS_FOUNDED'
     })
 }
+
+export const changeLanguage = () => dispatch => {
+    dispatch({
+        type: 'CHANGE_LANGUAGE'
+    })
+}

@@ -56,10 +56,16 @@ const Card = (props) => {
             ...initialAnimation
         }
     }
-    if (status === 'founded' && !displayingPairsFounded ) {
+    if (status === 'founded' ) {
         styles = {
-            opacity: 0,
+            opacity: 1,
             cursor: 'default'
+        }
+        if (!displayingPairsFounded) {
+            styles = {
+                opacity: 0,
+                cursor: 'default'
+            }
         }
     }
 

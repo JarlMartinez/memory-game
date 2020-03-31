@@ -6,6 +6,7 @@ const randomIndexForTheme =
     Math.floor(Math.random() * (MAX_INDEX_OF_THEMES - MIN_INDEX_OF_THEMES + 1) ) + MIN_INDEX_OF_THEMES
 
 export default {
+    language: 'spanish',
     loading: false,
     error: null,
     rickCharacters: null,
