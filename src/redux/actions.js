@@ -5,18 +5,15 @@ export const bringRickCharacters = () => async dispatch => {
     dispatch({
         type: 'LOADING'
     })
-        const MIN_NUM_OF_PAGES = 1
-        const MAX_NUM_OF_PAGES = 24
-        const randomPage = 
-            Math.floor(Math.random() * (MAX_NUM_OF_PAGES - MIN_NUM_OF_PAGES + 1) ) + MIN_NUM_OF_PAGES 
         
+    const bringAllCharacters = async () => {
+        let allCharacters = []
         try {
-            const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${randomPage}`)
-            const characters = response.data.results
-            dispatch({
-                type: 'BRING_RICK_CHARACTERS',
-                payload: characters
-            })
+            for (var i = 1; i <= 20; i++) {
+                const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${i}`)
+                const characters = response.data.results
+                allCharacters = allCharacters.concat(characters)
+            }
         } catch (err) {
             const theError = "There's an error loading Rick and Morty characters :O" + err.message
             console.error(new Error('Error' + err))
@@ -24,8 +21,14 @@ export const bringRickCharacters = () => async dispatch => {
                 type: 'ERROR',
                 payload: theError
             })
-
         }
+        return allCharacters
+    } 
+    const allCharacters = await bringAllCharacters()
+    dispatch({
+        type: 'BRING_RICK_CHARACTERS',
+        payload: allCharacters
+    })
 }
 
 export const startNewGame = (numOfPairs, characters) => dispatch => {

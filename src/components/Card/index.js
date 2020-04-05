@@ -88,7 +88,7 @@ const Card = (props) => {
             }}
             onClick={handleClick}>
             {/* I chose to place two images and change opacities so char.image gets
-            loaded rigth away when page laods. Faster */}
+            loaded rigth away when page laods. Its faster */}
             <img style={{opacity: opacityOfCharCover}} src={char.image}/>
             <img style={{opacity: opacityOfDefault}} src={defaultCover}/>
         </div>

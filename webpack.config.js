@@ -49,17 +49,14 @@ module.exports = {
                 }
             ]
         }),
-        // new WorkboxWebpackPlugin.GenerateSW({
-        //     runtimeCaching: [
-        //         {
-        //             urlPattern: new RegExp('https://damovie.jarlmartinez.now.sh'),
-        //             handler: 'NetworkFirst',
-        //             options: {
-        //                 cacheName:'api'
-        //             }
-        //         }
-        //     ]
-        // }),
+        new WorkboxWebpackPlugin.GenerateSW({
+            runtimeCaching: [
+                {
+                    urlPattern: new RegExp('https://memorama.now.sh'),
+                    handler: 'NetworkFirst',
+                }
+            ]
+        }),
     ],
     module: {
         rules: [

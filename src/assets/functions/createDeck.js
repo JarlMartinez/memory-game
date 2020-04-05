@@ -2,12 +2,12 @@ import createDesorderedArray from './createDesorderedArray'
 
 export default (pairsPlaying, characters) => {
     // The total characters will always be 20, tahts what every request brings
-    const TOTAL_CHARACTERS = 20
+    const TOTAL_CHARACTERS = 400
     // The min ID es dif on every page, we need to know the id of the first character 
     // and then we just add 20 to know the last id
     const minID = characters[0].id
-    // We add 19 bc the id of the 20th character is 19 nums ahead
-    const maxID = minID + 19
+    // We add 19 bc the id of the 400th character is 399 nums ahead
+    const maxID = minID + 399
     // First we choose a the random characters that will play on deck 
     const randomArray = createDesorderedArray(pairsPlaying, minID, maxID)
     const randomGame = randomArray.map(ran => {
