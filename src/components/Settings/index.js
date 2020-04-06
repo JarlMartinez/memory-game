@@ -8,6 +8,7 @@ import ChangeColorsThemeBoard from '../SettingsComponents/ChangeThemeBoard'
 
 import { IconContext } from 'react-icons'
 import { IoIosSettings } from 'react-icons/io'
+import { IoMdCloseCircleOutline } from 'react-icons/io'
 
 
 import './index.scss'
@@ -74,6 +75,9 @@ const Settings = () => {
         return (
             <div className='settingsModal'
                 onClick={closeAll}>
+                <IoMdCloseCircleOutline 
+                    size={45}
+                    className='closeButton'/>
                 <Boards />
             </div> 
         )
@@ -83,7 +87,7 @@ const Settings = () => {
         {
             !settings.opened
             ? <IconContext.Provider value={{className: 'settingsGear'}}>
-                    <IoIosSettings size={40} onClick={() => setSettings(prev => ({...prev, opened: true}))}/> 
+                    <IoIosSettings size={50} onClick={() => setSettings(prev => ({...prev, opened: true}))}/> 
                 </IconContext.Provider>
             : <SettingsModal />
         }

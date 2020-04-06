@@ -14,8 +14,20 @@
         height: 90px;
         border-radius: $general-border-radius;
         &.selectedTheme {
-            box-sizing: border-box;
-            border: 7px solid gold;
+            // box-sizing: border-box;
+            // border: 7px solid gold;
+            position: relative;
+        &::after {
+            position: absolute;
+            content: "";
+            top: 30px;
+            left: 20px;
+            width: 40px;
+            height: 15px;
+            transform: rotate(-45deg);
+            border-bottom: 10px solid $general-background;
+            border-left: 10px solid $general-background;
+        }
         }
     }
 }

@@ -3,11 +3,17 @@ import { connect } from 'react-redux'
 
 import { changeTheme } from '../../../redux/actions'
 
+
 import './index.scss'
 
 const Board = (props) => {
 
     const { themes, currentThemeIndex, changeTheme } = props
+
+    const handleClick = (e, i) => {
+        e.stopPropagation()
+        changeTheme(i)
+    }
 
     return (
         <div className='boardOfThemes'>
@@ -19,7 +25,7 @@ const Board = (props) => {
                 return (
                 <div
                     key={i}
-                    onClick={() => changeTheme(i)}
+                    onClick={(e) => handleClick(e, i)}
                     value={theme}
                     style={{background: theme.gradient}}
                     className={classForOption}>

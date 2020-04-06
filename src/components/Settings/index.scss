@@ -21,4 +21,11 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.527);
     text-align: center;
+    & .closeButton {
+        cursor: pointer;
+        color: $general-background;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
 }
