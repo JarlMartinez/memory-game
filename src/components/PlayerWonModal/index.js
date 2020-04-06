@@ -8,6 +8,7 @@ import './index.scss'
 const WonModal = (props) => {
 
     const { rickCharacters, numberOfPairsSelected,
+            themes, currentThemeIndex,
             startNewGame, numOfPairsOnDeck, language } = props
 
     let playAgainText, congratsText, infoText1, infoText2, infoText3
@@ -15,7 +16,7 @@ const WonModal = (props) => {
     switch (language) {
         case 'spanish':
             playAgainText = 'Jugar de nuevo'
-            congratsText = 'Ganaste!'
+            congratsText = '¡Ganaste!'
             infoText1 = 'Encontraste '
             infoText2 = ' pares en '
             infoText3 = ' intentos'
@@ -29,9 +30,11 @@ const WonModal = (props) => {
             break
     }
 
+    const currentBackground = themes[currentThemeIndex].gradient
+
     return (
         <div className='wonModalContainer' >
-            <div className='wonModal'>
+            <div className='wonModal' style={{background: currentBackground}}>
                 <h1>{congratsText}</h1>
                 <p>{infoText1}{numOfPairsOnDeck}{infoText2}{numberOfPairsSelected}{infoText3}</p>
                 <p onClick={() => {
@@ -48,6 +51,8 @@ const connectActions = {
 }
 
 const connectStore = store => ({
+    themes: store.themes,
+    currentThemeIndex: store.currentThemeIndex,
     language: store.language,
     rickCharacters: store.rickCharacters,
     numOfPairsOnDeck: store.game.numOfPairsOnDeck,

@@ -13,8 +13,7 @@ const Board = (props) => {
 
     const { loading, error, rickCharacters,
             game: {cardsFounded, pairSelected, deck, numOfPairsOnDeck,
-                isFirstRender, numberOfPairsSelected},
-            startNewGame } = props
+                isFirstRender}, startNewGame } = props
 
     //Start a game(create newDeck):
     //  *if rickCharacters are already here,
@@ -93,9 +92,7 @@ const Board = (props) => {
         <div className='board'>
             {displayContent()}
             {playerWon && 
-                <WonModal 
-                newGame={() => startNewGame(numOfPairsOnDeck, rickCharacters)}
-                tries={numberOfPairsSelected}/>}
+                <WonModal />}
         </div>
     )
 }
